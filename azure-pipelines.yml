@@ -23,3 +23,11 @@ steps:
 
 - script: dotnet run --project src/machine-learning/FraudPredictionTrainer/FraudPredictionTrainer.csproj --configuration $(buildConfiguration)
   displayName: 'Train ML model (dotnet run)'
+
+- task: AzureFileCopy@3
+  inputs:
+    SourcePath: 'X://MLModel.zip'
+    azureSubscription: 'Azure'
+    Destination: 'AzureBlob'
+    storage: 'mlmodel4rixka66zea4k'
+    ContainerName: 'model'
